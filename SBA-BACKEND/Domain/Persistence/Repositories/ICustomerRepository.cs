@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace SBA_BACKEND.Domain.Persistence.Repositories
-{	interface ICustomerRepository
+{	public interface ICustomerRepository
 	{
 		Task<IEnumerable<Customer>> ListAsync();
 		Task AddAsync(Customer customer);

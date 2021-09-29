@@ -17,8 +17,8 @@ namespace SBA_BACKEND.Mapping
             CreateMap<SaveOpinionResource, Opinion>();
             CreateMap<SaveReportResource, Report>();
             CreateMap<SaveSpecialityResource, Speciality>();
-            CreateMap<SaveSpecialityTechnicalResource, SpecialityTechnical>();
-            CreateMap<SaveTechnicalResource, Technical>();
+            CreateMap<SaveSpecialityTechnicianResource, SpecialityTechnician>();
+            CreateMap<SaveTechnicianResource, Technician>();
             CreateMap<SaveUserResource, User>();
         }
     }

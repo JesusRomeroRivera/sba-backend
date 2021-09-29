@@ -15,7 +15,7 @@ namespace SBA_BACKEND.Domain.Models
         public Customer Customer { get; set; }
 
         //One to Many Relationship
-        public int TechnicalId { get; set; }
-        public Technical Technical { get; set; }
+        public int TechnicianId { get; set; }
+        public Technician Technician { get; set; }
     }
 }

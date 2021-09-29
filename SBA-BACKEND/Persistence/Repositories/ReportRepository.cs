@@ -27,8 +27,8 @@ namespace SBA_BACKEND.Persistence.Repositories
 			   .Where(report => report.Id == id)
 			   .Include(report => report.Customer)
 			   .Include(report => report.Customer.District)
-			   .Include(report => report.Technical)
-			   .Include(report => report.Technical.District)
+			   .Include(report => report.Technician)
+			   .Include(report => report.Technician.District)
 			   .ToListAsync();
 			return reports.First();
 		}
@@ -38,8 +38,8 @@ namespace SBA_BACKEND.Persistence.Repositories
 			return await _context.Reports
 				.Include(report => report.Customer)
 			    .Include(report => report.Customer.District)
-			    .Include(report => report.Technical)
-			    .Include(report => report.Technical.District)
+			    .Include(report => report.Technician)
+			    .Include(report => report.Technician.District)
 				.ToListAsync();
 		}
 

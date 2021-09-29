@@ -17,8 +17,8 @@ namespace SBA_BACKEND.Domain.Persistence.Contexts
         public DbSet<Opinion> Opinions { get; set; }
         public DbSet<Report> Reports { get; set; }
         public DbSet<Speciality> Specialities{ get; set; }
-        public DbSet<SpecialityTechnical> SpecialityTechnicals { get; set; }
-        public DbSet<Technical> Technicals { get; set; }
+        public DbSet<SpecialityTechnician> SpecialityTechnicians { get; set; }
+        public DbSet<Technician> Technicians { get; set; }
         public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -32,8 +32,8 @@ namespace SBA_BACKEND.Domain.Persistence.Contexts
             builder.Entity<Opinion>().ToTable("Opinions");
             builder.Entity<Report>().ToTable("Reports");
             builder.Entity<Speciality>().ToTable("Specialities");
-            builder.Entity<SpecialityTechnical>().ToTable("SpecialityTechnicals");
-            builder.Entity<Technical>().ToTable("Technicals");
+            builder.Entity<SpecialityTechnician>().ToTable("SpecialityTechnicians");
+            builder.Entity<Technician>().ToTable("Technicians");
             builder.Entity<User>().ToTable("Users");
 
             //CONSTRAINTS
@@ -52,12 +52,12 @@ namespace SBA_BACKEND.Domain.Persistence.Contexts
             builder.Entity<Customer>().Property(customer => customer.Password).IsRequired().HasMaxLength(150);
             builder.Entity<Customer>().Property(customer => customer.Cellphone).IsRequired();
 
-            //Constraints of Technical
-            builder.Entity<Technical>().Property(technical => technical.Name).IsRequired().HasMaxLength(50);
-            builder.Entity<Technical>().Property(technical => technical.Email).IsRequired().HasMaxLength(50);
-            builder.Entity<Technical>().Property(technical => technical.Password).IsRequired().HasMaxLength(150);
-            builder.Entity<Technical>().Property(technical => technical.Cellphone).IsRequired();
-            builder.Entity<Technical>().Property(technical => technical.Description).HasMaxLength(300);
+            //Constraints of Technician
+            builder.Entity<Technician>().Property(technician => technician.Name).IsRequired().HasMaxLength(50);
+            builder.Entity<Technician>().Property(technician => technician.Email).IsRequired().HasMaxLength(50);
+            builder.Entity<Technician>().Property(technician => technician.Password).IsRequired().HasMaxLength(150);
+            builder.Entity<Technician>().Property(technician => technician.Cellphone).IsRequired();
+            builder.Entity<Technician>().Property(technician => technician.Description).HasMaxLength(300);
 
             //Constraints of District
             builder.Entity<District>().HasKey(district => district.Id); //Primary Key
@@ -80,8 +80,8 @@ namespace SBA_BACKEND.Domain.Persistence.Contexts
             builder.Entity<Speciality>().Property(speciality => speciality.Id).IsRequired().ValueGeneratedOnAdd(); //Auto Generate a Primary Key
             builder.Entity<Speciality>().Property(speciality => speciality.Name).IsRequired().HasMaxLength(30);
 
-            //Constraints of SpecialityTechnical
-            builder.Entity<SpecialityTechnical>().HasKey(st => new { st.SpecialityId, st.TechnicalId }); //Primary Key
+            //Constraints of SpecialityTechnician
+            builder.Entity<SpecialityTechnician>().HasKey(st => new { st.SpecialityId, st.TechnicianId }); //Primary Key
 
             //RELATIONSHIPS
 
@@ -99,10 +99,10 @@ namespace SBA_BACKEND.Domain.Persistence.Contexts
                 .WithMany(customer => customer.Opinions)
                 .HasForeignKey(opinion => opinion.CustomerId);
 
-            builder.Entity<Opinion>() //One to Many with Technical
-                .HasOne(opinion => opinion.Technical)
-                .WithMany(technical => technical.Opinions)
-                .HasForeignKey(opinion => opinion.TechnicalId);
+            builder.Entity<Opinion>() //One to Many with Technician
+                .HasOne(opinion => opinion.Technician)
+                .WithMany(technician => technician.Opinions)
+                .HasForeignKey(opinion => opinion.TechnicianId);
 
             //Relationships of Report
 
@@ -111,24 +111,25 @@ namespace SBA_BACKEND.Domain.Persistence.Contexts
                 .WithMany(customer => customer.Reports)
                 .HasForeignKey(report => report.CustomerId);
 
-            builder.Entity<Report>() //One to Many with Technical
-                .HasOne(report => report.Technical)
-                .WithMany(technical => technical.Reports)
-                .HasForeignKey(report => report.TechnicalId);
+            builder.Entity<Report>() //One to Many with Technician
+                .HasOne(report => report.Technician)
+                .WithMany(technician => technician.Reports)
+                .HasForeignKey(report => report.TechnicianId);
 
-            //Relationships of SpecialityTechnical
+            //Relationships of SpecialityTechnician
 
-            //Many to Many with Speciality and Technical
-            builder.Entity<SpecialityTechnical>()
+            //Many to Many with Speciality and Technician
+            builder.Entity<SpecialityTechnician>()
                 .HasOne(st => st.Speciality)
-                .WithMany(speciality => speciality.SpecialityTechnicals)
+                .WithMany(speciality => speciality.SpecialityTechnicians)
                 .HasForeignKey(st => st.SpecialityId);
-            builder.Entity<SpecialityTechnical>()
-                .HasOne(st => st.Technical)
-                .WithMany(technical => technical.SpecialityTechnicals)
-                .HasForeignKey(st => st.TechnicalId);
+            builder.Entity<SpecialityTechnician>()
+                .HasOne(st => st.Technician)
+                .WithMany(technician => technician.SpecialityTechnicians)
+                .HasForeignKey(st => st.TechnicianId);
 
             //SEED DATA UDS LO PONEN >:V
+            //no
         }
     }
 }

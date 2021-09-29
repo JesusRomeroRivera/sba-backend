@@ -6,13 +6,13 @@ using SBA_BACKEND.Domain.Models;
 
 namespace SBA_BACKEND.Domain.Services.Communications
 {
-	public class TechnicalResponse : BaseResponse<Technical>
+	public class TechnicianResponse : BaseResponse<Technician>
 	{
-		public TechnicalResponse(Technical resource) : base(resource)
+		public TechnicianResponse(Technician resource) : base(resource)
 		{
 		}
 
-		public TechnicalResponse(string message) : base(message)
+		public TechnicianResponse(string message) : base(message)
 		{
 		}
 	}

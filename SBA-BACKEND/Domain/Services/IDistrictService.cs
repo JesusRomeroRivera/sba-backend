@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using SBA_BACKEND.Domain.Models;
 using SBA_BACKEND.Domain.Services.Communications;
 
-namespace TPC_UPC.Domain.Services
+namespace SBA_BACKEND.Domain.Services
 {
 	public interface IDistrictService
 	{

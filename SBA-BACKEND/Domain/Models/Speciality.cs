@@ -11,6 +11,6 @@ namespace SBA_BACKEND.Domain.Models
         public string Name { get; set; }
 
         //Many to Many reverse Relationship
-        public List<SpecialityTechnical> SpecialityTechnicals { get; set; }
+        public List<SpecialityTechnician> SpecialityTechnicians { get; set; }
     }
 }

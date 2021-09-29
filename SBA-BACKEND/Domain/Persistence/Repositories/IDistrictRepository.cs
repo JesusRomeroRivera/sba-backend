@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace SBA_BACKEND.Domain.Persistence.Repositories
-{	interface IDistrictRepository
+{	public interface IDistrictRepository
 	{
 		Task<IEnumerable<District>> ListAsync();
 		Task AddAsync(District district);

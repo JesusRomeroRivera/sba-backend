@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace SBA_BACKEND.Resources
 {
-    public class SaveSpecialityTechnicalResource
+    public class SaveSpecialityTechnicianResource
     {
         [Required]
         public int SpecialityId { get; set; }
         [Required]
-        public int TechnicalId { get; set; }
+        public int TechnicianId { get; set; }
     }
 }

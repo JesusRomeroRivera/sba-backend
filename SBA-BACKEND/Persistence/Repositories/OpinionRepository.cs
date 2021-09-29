@@ -27,8 +27,8 @@ namespace SBA_BACKEND.Persistence.Repositories
 			   .Where(opinion => opinion.Id == id)
 			   .Include(opinion => opinion.Customer)
 			   .Include(opinion => opinion.Customer.District)
-			   .Include(opinion => opinion.Technical)
-			   .Include(opinion => opinion.Technical.District)
+			   .Include(opinion => opinion.Technician)
+			   .Include(opinion => opinion.Technician.District)
 			   .ToListAsync();
 			return opinions.First();
 		}
@@ -38,8 +38,8 @@ namespace SBA_BACKEND.Persistence.Repositories
 			return await _context.Opinions
 				.Include(opinion => opinion.Customer)
 			    .Include(opinion => opinion.Customer.District)
-			    .Include(opinion => opinion.Technical)
-			    .Include(opinion => opinion.Technical.District)
+			    .Include(opinion => opinion.Technician)
+			    .Include(opinion => opinion.Technician.District)
 				.ToListAsync();
 		}
 
