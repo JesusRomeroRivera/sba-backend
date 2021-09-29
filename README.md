@@ -22,7 +22,7 @@ Herramientas que utilizamos en el proyecto
 [C#] Lenguaje base usado para el backend.
 [SQL] Lenaguaje usado para la base de datos.
 [SnakeCase] Nomenclatura base de C#.
-Autores. ✒️
+Autores ✒️
 Grupo Minka, formado por los integrantes:
 
 Sebastián Hernández
