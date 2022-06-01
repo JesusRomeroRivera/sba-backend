@@ -60,7 +60,8 @@ jobs:
     - name: Publish
       run: |
         cd ./SBA-BACKEND
-        heroku container:login
-        docker build -t ${{secrets.HEROKU_APP_NAME}} .
-        heroku container:push web -a ${{secrets.HEROKU_APP_NAME}}
-        heroku container:release web -a ${{secrets.HEROKU_APP_NAME}}
+          heroku container:login
+          docker build -t ${{secrets.HEROKU_APP_NAME}} .
+          heroku container:push web -a ${{secrets.HEROKU_APP_NAME}}
+          heroku container:release web -a ${{secrets.HEROKU_APP_NAME}}
+        EOF
