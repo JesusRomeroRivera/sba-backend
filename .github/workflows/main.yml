@@ -1,3 +1,4 @@
+
 name: .NET
 
 on:
@@ -8,9 +9,33 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: 6.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: 6.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Test
+      run: dotnet test
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
     - name: Setup .NET
@@ -19,14 +44,23 @@ jobs:
         dotnet-version: 5.0.x
     - name: Restore dependencies
       run: dotnet restore
-    - name: Build
-      run: dotnet build --no-restore
-    - name: Test
-      run: dotnet test
-      
-    - name: Docker build
-      run: docker login --username=_ --password=${{secrets.HEROKU_API_KEY}} registry.heroku.com
+    - name: Heroku login credentials
+      run: |
+        cat > ~/.netrc <<EOF
+          machine api.heroku.com
+            login $HEROKU_EMAIL
+            password $HEROKU_API_KEY
+          machine git.heroku.com
+            login $HEROKU_EMAIL
+            password $HEROKU_API_KEY
+        EOF
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
     - name: Publish
       run: |
+        cd ./PiensaPeru.API
+        heroku container:login
+        docker build -t ${{secrets.HEROKU_APP_NAME}} .
         heroku container:push web -a ${{secrets.HEROKU_APP_NAME}}
         heroku container:release web -a ${{secrets.HEROKU_APP_NAME}}
