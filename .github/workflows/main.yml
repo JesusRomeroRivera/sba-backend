@@ -59,9 +59,11 @@ jobs:
         HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
     - name: Publish
       run: |
+        cat > ~/.netrc <<EOF
+          machine api.heroku.com
+            login $HEROKU_EMAIL
+            password $HEROKU_API_KEY
         cd ./SBA-BACKEND
-          heroku container:login
-          docker build -t ${{secrets.HEROKU_APP_NAME}} .
-          heroku container:push web -a ${{secrets.HEROKU_APP_NAME}}
-          heroku container:release web -a ${{secrets.HEROKU_APP_NAME}}
-        EOF
+        docker build -t ${{secrets.HEROKU_APP_NAME}} .
+        heroku container:push web -a ${{secrets.HEROKU_APP_NAME}}
+        heroku container:release web -a ${{secrets.HEROKU_APP_NAME}}
