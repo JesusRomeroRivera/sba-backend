@@ -3,6 +3,8 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>SBA_BACKEND</RootNamespace>
+    <IsPackable>false</IsPackable>
+    <TargetPlatform>x64</TargetPlatform>
   </PropertyGroup>
 
   <ItemGroup>
